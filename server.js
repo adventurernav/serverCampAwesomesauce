@@ -12,8 +12,8 @@ const packlist = require('./controllers/packlistController')
 const item = require('./controllers/itemController')
 const profile = require('./controllers/profileController')
 
-// sequelize.sync();
-sequelize.sync({force: true})
+sequelize.sync();
+// sequelize.sync({force: true})
 app.use(express.json());
 
 /**************************************
