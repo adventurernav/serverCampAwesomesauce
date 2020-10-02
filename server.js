@@ -1,11 +1,11 @@
 require('dotenv').config()
-// const cors = require('cors')
+const cors = require('cors')
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT;
 let sequelize = require('./db');
 
-// app.use(cors())
+app.use(cors())
 
 const user = require('./controllers/userController')
 const packlist = require('./controllers/packlistController')
@@ -14,6 +14,7 @@ const profile = require('./controllers/profileController')
 
 sequelize.sync();
 // sequelize.sync({force: true})
+app.use(require('./middleware/headers'))
 app.use(express.json());
 
 /**************************************
