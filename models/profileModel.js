@@ -4,10 +4,13 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true,
-            required: true
+            required: true,
+            validate: {
+                isAlphanumeric: true
+            }
         },
         profilePic: {
-            type: DataTypes.STRING, 
+            type: DataTypes.STRING,
             allowNull: false,
             defaultsTo: 'https://images-na.ssl-images-amazon.com/images/I/71%2BncdWcmRL.png'
         },
@@ -17,11 +20,13 @@ module.exports = (sequelize, DataTypes) => {
         },
         burnsAttended: {
             type: DataTypes.INTEGER,
-            allowNull: true
+            allowNull: true,
+            validate: { isInt: true, }
         },
         favPrinciple: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: true,
+            isIn: [['Radical Inclusion', 'Gifting', 'Decommodification', 'Radical Self-reliance', 'Radical Self-expression', 'Communal Effort', 'Civic Responsibility', 'Leave No Trace', 'Participation', 'Immediacy']]
         },
         aboutMe: {
             type: DataTypes.STRING,

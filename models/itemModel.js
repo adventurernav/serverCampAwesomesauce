@@ -3,7 +3,8 @@ module.exports = (sequelize, DataTypes) => {
         itemName: {
             type: DataTypes.STRING,
             allowNull: false, 
-            unique: true
+            unique: true,
+            validate: {isAlphanumeric: true }
         },
         isOwned: {
             type: DataTypes.BOOLEAN,
@@ -14,12 +15,12 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultsTo: false
-
         },
         qty: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            defaultsTo: 1
+            defaultsTo: 1,
+            validate: {isInt: true}
         }
     })
     return Item;

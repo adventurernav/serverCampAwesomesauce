@@ -3,7 +3,10 @@ module.exports = (sequelize, DataTypes) => {
         email: {
             type: DataTypes.STRING,
             allowNull: false, 
-            unique: true
+            unique: true,
+            validate: {
+                isEmail: true
+            }
         },
         password: {
             type: DataTypes.STRING, 
@@ -11,15 +14,25 @@ module.exports = (sequelize, DataTypes) => {
         },
         role:{
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            defaultsTo: 'campmate',
+            validate: {
+                isIn: [['campmate', 'admin', 'test']]
+            }
         }, 
         firstName: {
             type: DataTypes.STRING, 
-            allowNull: false
+            allowNull: false,
+            validate: {
+                isAlpha: true
+            }
         },
         lastName: {
             type: DataTypes.STRING, 
-            allowNull: false
+            allowNull: false,
+            validate: {
+                isAlpha: true
+            }
         }
     })
     return User;
