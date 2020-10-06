@@ -91,7 +91,7 @@ console.log('USER ID ---> ', req.user);
 /**************************************
  ********* DELETE ACCOUNT ************
 ************************************ */
-router.delete('/:id', validateSession, (req,res) => {
+router.delete('/', validateSession, (req,res) => {
     const thisUser = {where: {
         id: req.user.id
     }}
@@ -117,7 +117,7 @@ router.delete('/:id', validateSession, (req,res) => {
 
 router.get('/', validateSession, (req,res) => {
     let userid = req.user.id
-    User.findAll({
+    User.findOne({
         where: {id: userid}
     })
     .then(user => res.status(200).json(user))

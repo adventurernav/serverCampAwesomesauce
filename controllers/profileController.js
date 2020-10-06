@@ -104,6 +104,20 @@ router.delete('/:id', validateSession, (req, res) => {
         }).catch((err) => res.status(500).json({ message: 'Cannot find your information.' }))
 })
 
+
+/**************************************
+ ********* GET MY PROFILE INFO *********
+************************************ */
+
+router.get('/', validateSession, (req, res) => {
+    let searchid = req.user.id
+    Profile.findOne({
+        where: { userId: searchid }
+    })
+        .then(users => res.status(200).json({message: 'User(s) found:', users: users}))
+        .catch(err => res.status(500).json({ message: 'Could not get user information. Please try again.', error: err }))
+})
+
 /**************************************
  ********* GET ANY PROFILE INFO *********
 ************************************ */
