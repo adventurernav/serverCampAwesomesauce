@@ -2,9 +2,7 @@ module.exports = (sequelize, DataTypes) => {
     const Item = sequelize.define('item', {
         itemName: {
             type: DataTypes.STRING,
-            allowNull: false, 
-            unique: true,
-            validate: {isAlphanumeric: true }
+            allowNull: false
         },
         isOwned: {
             type: DataTypes.BOOLEAN,
