@@ -6,11 +6,11 @@ const Item = require('../db').import('../models/itemModel')
  ********* GET ITEMS OF PACKLIST *********
 ************************************ */
 router.get('/:packlistId', validateSession, (req,res) => {
-    let userid = req.user.id
+    console.log(req)
+    let plIdStr = req.params.packlistId
     Item.findAll({
         where: {
-            userId: userid,
-            packlistId: req.params.packlistId
+            packlistId: plIdStr
         }
     })
     .then(items => res.status(200).json(items))
