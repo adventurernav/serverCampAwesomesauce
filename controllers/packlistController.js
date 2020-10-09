@@ -8,7 +8,8 @@ const Packlist = require('../db').import('../models/packlistModel')
 router.get('/', validateSession, (req,res) => {
     let userid = req.user.id
     Packlist.findAll({
-        where: {userId: userid}
+        where: {userId: userid},
+        order: [['updatedAt', 'DESC']]
     })
     .then(packlists => res.status(200).json(packlists))
     .catch(err => res.status(500).json({message: 'Could not get packlists. Please try again.', error: err}))

@@ -7,11 +7,9 @@ const Item = require('../db').import('../models/itemModel')
 ************************************ */
 router.get('/:packlistId', validateSession, (req,res) => {
     console.log(req)
-    let plIdStr = req.params.packlistId
     Item.findAll({
-        where: {
-            packlistId: plIdStr
-        }
+        where: {packlistId: req.params.packlistId},
+        order: [['updatedAt', 'DESC']]
     })
     .then(items => res.status(200).json(items))
     .catch(err => res.status(500).json({message: 'Could not get items. Please try again.', error: err}))
