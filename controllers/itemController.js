@@ -36,7 +36,7 @@ router.post('/:packlistId', validateSession, (req,res) => {
  ********* UPDATE ITEM *********
 ************************************ */
 router.put('/:itemId', validateSession, (req,res) => {
-
+console.log(req)
     const updateItem = {
         itemName: req.body.itemName,
         isOwned: req.body.isOwned,
@@ -49,7 +49,6 @@ router.put('/:itemId', validateSession, (req,res) => {
             id: req.params.itemId, 
         }
     };
-
     Item.update(updateItem, query)
     .then((itemsUpdated) => res.status(200).json({message: 'Update was successful', NumberOfItemsUpdated: itemsUpdated})) 
     .catch((err) => res.status(500).json({message: 'Update Failed',error: err})
