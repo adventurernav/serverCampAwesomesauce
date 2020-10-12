@@ -67,10 +67,10 @@ router.put('/', validateSession, (req, res) => {
     Profile.update(updateProfile, query)
         .then((profileUpdated) => {
             console.log(profileUpdated);
-            if (profileUpdated === [1]) {
+            if (profileUpdated[0] === 1) {
                 return res.status(200).json({message: `Update was sucessful`})
             } else {
-                return res.status(500).json({message: `There is somethin weird going on here. You should come check this code because the update shows in pg admin but you're gettin this error message. Something went wrong while trying to update your profile. Please try again later.`})
+                return res.status(500).json({message: `There is something weird going on here. You should come check this code because the update shows in pg admin but you're gettin this error message. Something went wrong while trying to update your profile. Please try again later.`})
             }
         })
         .catch((err) => res.status(500).json({ message: 'Update Failed', error: err })
