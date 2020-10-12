@@ -74,7 +74,6 @@ router.put('/', validateSession, (req,res) => {
         lastName: req.body.lastName,
         password: bcrypt.hashSync(req.body.password, 11)
     }
-console.log('USER ID ---> ', req.user);
     const query = {
         where: {
             id: req.user.id, 

@@ -11,6 +11,7 @@ const user = require('./controllers/userController')
 const packlist = require('./controllers/packlistController')
 const item = require('./controllers/itemController')
 const profile = require('./controllers/profileController')
+const admin = require('./controllers/adminController')
 
 sequelize.sync();
 // sequelize.sync({force: true})
@@ -24,21 +25,25 @@ app.use(express.json());
 app.use('/user', user)
 
 /**************************************
+ ********* Admin Route ****************
+************************************ */
+app.use(require('./middleware/validateAdmin'))
+app.use('/admin', admin)
+/**************************************
  ********* Protected Routes ************
 ************************************ */
 app.use(require('./middleware/validateSession'))
 app.use('/packlist', packlist)
 app.use('/item', item)
-
 app.use('/profile', profile)
 
-// app.use('/admin', admin)
+
 
 //******************************** */
-// app.get("*", (req, res)=>{
-//     res.status(404).send("Sorry, nothing found here");
+app.get("*", (req, res)=>{
+    res.status(404).send("Sorry, nothing found here");
 
-// })
+})
 
 app.listen(PORT, function(){
     console.log(`SERVER is listening on port ${PORT}`)
