@@ -1,7 +1,6 @@
 const router = require('express').Router()
 
 const User = require('../db').import('../models/userModel')
-const Profile = require('../db').import('../models/profileModel')
 const validateSession = require('../middleware/validateSession');
 const validateAdmin = require('../middleware/validateAdmin');
 const bcrypt = require('bcryptjs')
@@ -57,5 +56,6 @@ router.put('/users/password/:userId', validateAdmin, (req, res) => {
         .catch((err) => res.status(500).json({ message: 'Update Failed', error: err })
         );
 });
+
 
 module.exports = router
