@@ -8,7 +8,6 @@ const validateSession = require('../middleware/validateSession');
  ********* SIGN UP / REGISTER *********
 ************************************ */
 router.post('/register', (req,res) => {
-    console.log(req.body);
     User.create({
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, 11),
@@ -32,7 +31,6 @@ router.post('/register', (req,res) => {
  ********* SIGN IN / LOGIN ************
 ************************************ */
 router.post('/login', (req,res) => {
-    console.log(req);
     User.findOne({
         where: {
             email: req.body.email

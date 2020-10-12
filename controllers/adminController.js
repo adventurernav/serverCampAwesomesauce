@@ -21,7 +21,6 @@ router.get('/users', validateAdmin, (req, res) => {
  ********* UPDATE USER *********
 ************************************ */
 router.put('/users/:userId', validateAdmin, (req, res) => {
-    console.log(req)
     const updateUser = {
         email: req.body.email,
         firstName: req.body.firstName,
@@ -42,7 +41,6 @@ router.put('/users/:userId', validateAdmin, (req, res) => {
 ********* UPDATE USER PASSWORD *********
 ************************************ */
 router.put('/users/password/:userId', validateAdmin, (req, res) => {
-    console.log(req)
     const updatePassword = {
         password: bcrypt.hashSync(req.body.password, 11)
     }

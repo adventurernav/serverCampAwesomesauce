@@ -6,7 +6,6 @@ const Item = require('../db').import('../models/itemModel')
  ********* GET ITEMS OF PACKLIST *********
 ************************************ */
 router.get('/:packlistId', validateSession, (req,res) => {
-    console.log(req)
     Item.findAll({
         where: {packlistId: req.params.packlistId},
         order: [['updatedAt', 'DESC']]
@@ -36,7 +35,6 @@ router.post('/:packlistId', validateSession, (req,res) => {
  ********* UPDATE ITEM *********
 ************************************ */
 router.put('/:itemId', validateSession, (req,res) => {
-console.log(req)
     const updateItem = {
         itemName: req.body.itemName,
         isOwned: req.body.isOwned,

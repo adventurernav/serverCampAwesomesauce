@@ -15,7 +15,6 @@ const validateAdmin = (req, res, next) => {
                     }
                 })
                 .then(user => {
-                    console.log(user)
                     if (!user) throw err;
                     if (user.dataValues.role!=='admin') {
                         return res.status(401).send({auth: false, message: 'Invalid Credentials. Please log in as Admin to access this feature.'})

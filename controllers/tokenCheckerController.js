@@ -7,7 +7,6 @@ const validateSession = require('../middleware/validateSession');
 ************************************ */
 
 router.get('/', validateSession, (req,res) => {
-    console.log('TOKEN CHECKER')
     let userid = req.user.id
     User.findOne({
         where: {id: userid}

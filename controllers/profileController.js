@@ -13,7 +13,6 @@ router.post('/register/:id', validateSession, (req, res) => {
     }
     Profile.findAll(checkForProfile)
         .then((results, err) => {
-            console.log('RESULTS checkForProfile: ', results);
             if (results.length === 0) {
                 Profile.create({
                     playaname: req.body.playaname,
@@ -66,7 +65,6 @@ router.put('/', validateSession, (req, res) => {
 
     Profile.update(updateProfile, query)
         .then((profileUpdated) => {
-            console.log(profileUpdated);
             if (profileUpdated[0] === 1) {
                 return res.status(200).json({message: `Update was sucessful`})
             } else {
