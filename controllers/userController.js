@@ -8,7 +8,6 @@ const validateSession = require('../middleware/validateSession');
  ********* SIGN UP / REGISTER *********
 ************************************ */
 router.post('/register', (req,res) => {
-    console.log(req.body);
     User.create({
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, 11),
@@ -32,7 +31,6 @@ router.post('/register', (req,res) => {
  ********* SIGN IN / LOGIN ************
 ************************************ */
 router.post('/login', (req,res) => {
-    console.log(req);
     User.findOne({
         where: {
             email: req.body.email
@@ -74,7 +72,6 @@ router.put('/', validateSession, (req,res) => {
         lastName: req.body.lastName,
         password: bcrypt.hashSync(req.body.password, 11)
     }
-console.log('USER ID ---> ', req.user);
     const query = {
         where: {
             id: req.user.id, 
@@ -91,7 +88,7 @@ console.log('USER ID ---> ', req.user);
 /**************************************
  ********* DELETE ACCOUNT ************
 ************************************ */
-router.delete('/:id', validateSession, (req,res) => {
+router.delete('/', validateSession, (req,res) => {
     const thisUser = {where: {
         id: req.user.id
     }}
@@ -117,7 +114,7 @@ router.delete('/:id', validateSession, (req,res) => {
 
 router.get('/', validateSession, (req,res) => {
     let userid = req.user.id
-    User.findAll({
+    User.findOne({
         where: {id: userid}
     })
     .then(user => res.status(200).json(user))

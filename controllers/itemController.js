@@ -6,12 +6,9 @@ const Item = require('../db').import('../models/itemModel')
  ********* GET ITEMS OF PACKLIST *********
 ************************************ */
 router.get('/:packlistId', validateSession, (req,res) => {
-    let userid = req.user.id
     Item.findAll({
-        where: {
-            userId: userid,
-            packlistId: req.params.packlistId
-        }
+        where: {packlistId: req.params.packlistId},
+        order: [['updatedAt', 'DESC']]
     })
     .then(items => res.status(200).json(items))
     .catch(err => res.status(500).json({message: 'Could not get items. Please try again.', error: err}))
@@ -38,7 +35,6 @@ router.post('/:packlistId', validateSession, (req,res) => {
  ********* UPDATE ITEM *********
 ************************************ */
 router.put('/:itemId', validateSession, (req,res) => {
-
     const updateItem = {
         itemName: req.body.itemName,
         isOwned: req.body.isOwned,
@@ -51,7 +47,6 @@ router.put('/:itemId', validateSession, (req,res) => {
             id: req.params.itemId, 
         }
     };
-
     Item.update(updateItem, query)
     .then((itemsUpdated) => res.status(200).json({message: 'Update was successful', NumberOfItemsUpdated: itemsUpdated})) 
     .catch((err) => res.status(500).json({message: 'Update Failed',error: err})

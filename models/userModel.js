@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         role:{
             type: DataTypes.STRING,
             allowNull: false,
-            defaultsTo: 'campmate',
+            defaultsValue: 'campmate',
             validate: {
                 isIn: [['campmate', 'admin', 'test']]
             }

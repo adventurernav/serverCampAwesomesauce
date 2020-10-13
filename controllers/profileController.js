@@ -13,7 +13,6 @@ router.post('/register/:id', validateSession, (req, res) => {
     }
     Profile.findAll(checkForProfile)
         .then((results, err) => {
-            console.log('RESULTS checkForProfile: ', results);
             if (results.length === 0) {
                 Profile.create({
                     playaname: req.body.playaname,
@@ -66,11 +65,11 @@ router.put('/', validateSession, (req, res) => {
 
     Profile.update(updateProfile, query)
         .then((profileUpdated) => {
-            console.log(profileUpdated);
-            if (profileUpdated === [1]) {
+            console.log(profileUpdated)
+            if (profileUpdated[0] === 1) {
                 return res.status(200).json({message: `Update was sucessful`})
             } else {
-                return res.status(500).json({message: `There is somethin weird going on here. You should come check this code because the update shows in pg admin but you're gettin this error message. Something went wrong while trying to update your profile. Please try again later.`})
+                return res.status(500).json({message: `Something went wrong while trying to update your profile. Please try again later.`})
             }
         })
         .catch((err) => res.status(500).json({ message: 'Update Failed', error: err })
@@ -102,6 +101,20 @@ router.delete('/:id', validateSession, (req, res) => {
                 console.log(err);
             }
         }).catch((err) => res.status(500).json({ message: 'Cannot find your information.' }))
+})
+
+
+/**************************************
+ ********* GET MY PROFILE INFO *********
+************************************ */
+
+router.get('/', validateSession, (req, res) => {
+    let searchid = req.user.id
+    Profile.findOne({
+        where: { userId: searchid }
+    })
+        .then(users => res.status(200).json({message: 'User(s) found:', users: users}))
+        .catch(err => res.status(500).json({ message: 'Could not get user information. Please try again.', error: err }))
 })
 
 /**************************************
