@@ -1,7 +1,5 @@
 const router = require('express').Router()
-
 const User = require('../db').import('../models/userModel')
-const validateSession = require('../middleware/validateSession');
 const validateAdmin = require('../middleware/validateAdmin');
 const bcrypt = require('bcryptjs')
 
@@ -55,5 +53,37 @@ router.put('/users/password/:userId', validateAdmin, (req, res) => {
         );
 });
 
+/**************************************
+ ********* DELETE USER ************
+************************************ */
+router.delete('/users/:id', validateAdmin, (req,res) => {
+    const thisUser = {where: {
+        id: req.params.id
+    }}
+    User.findOne(thisUser)
+    .then((results,err)=> {
+        if (results){
+            User.destroy(thisUser)
+            .then(()=> {
+                User.findAll()
+                .then(user => {
+                    let updatedUsers={
+                        user:user,
+                        message: 'User account was sucessfully deleted.'
+                    }
+                    return res.status(200).json(updatedUsers)
+                })
+                .catch(err => res.status(500).json({ message: 'Could not get user information. Please try again.', error: err }))
+            })
+            .catch((err)=> res.status(500).json({message: 'Something went wrong. Please try again.', error:err}))
+            ;
+        }  else {
+            res.status(500).json({message: 'No user detected'})
+        }
+        if(err){
+            console.log(err);
+        }
+    }) .catch((err) => res.status(500).json({message:'Cannot find your information.', error: err}))
+})
 
 module.exports = router
