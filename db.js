@@ -20,15 +20,13 @@ Profile = sequelize.import('./models/profileModel');
 Packlist = sequelize.import('./models/packlistModel');
 Item = sequelize.import('./models/itemModel');
 
-User.hasOne(Profile);
+User.hasOne(Profile,{onDelete:'cascade'});
 Profile.belongsTo(User);
 
-Packlist.belongsTo(User);
+Packlist.belongsTo(User,{onDelete:'cascade'});
 User.hasMany(Packlist);
 
 Item.belongsTo(Packlist);
 Packlist.hasMany(Item)
 
 module.exports = sequelize;
-
-
