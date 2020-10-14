@@ -11,7 +11,7 @@ router.get('/', validateSession, (req,res) => {
     User.findOne({
         where: {id: userid}
     })
-    .then(user => res.status(200).json({message: 'Success', user:user}))
+    .then(user => res.status(200).json({message: 'Success'}))
     .catch(err => res.status(500).json({message: 'Could not get token. Please try again.', error: err}))
 })
 

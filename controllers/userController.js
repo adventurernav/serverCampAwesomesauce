@@ -69,8 +69,7 @@ router.put('/', validateSession, (req,res) => {
     const updateUser = {
         email: req.body.email,
         firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        password: bcrypt.hashSync(req.body.password, 11)
+        lastName: req.body.lastName
     }
     const query = {
         where: {
@@ -84,7 +83,25 @@ router.put('/', validateSession, (req,res) => {
 );
 });
 
+/**************************************
+ ********* UPDATE USER PASSWORD ************
+************************************ */
 
+router.put('/password', validateSession, (req,res) => {
+    const updateUser = {
+        password: bcrypt.hashSync(req.body.password, 11)
+    }
+    const query = {
+        where: {
+            id: req.user.id, 
+        }
+    };
+
+    User.update(updateUser, query)
+    .then((usersUpdated) => res.status(200).json({message: 'Update was successful', NumberOfUsersUpdated: usersUpdated})) 
+    .catch((err) => res.status(500).json({message: 'Update Failed',error: err})
+);
+});
 /**************************************
  ********* DELETE ACCOUNT ************
 ************************************ */
