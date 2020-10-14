@@ -67,7 +67,7 @@ router.put('/', validateSession, (req, res) => {
         .then((profileUpdated) => {
             console.log(profileUpdated)
             if (profileUpdated[0] === 1) {
-                return res.status(200).json({message: `Update was sucessful`})
+                return res.status(200).json({message: `Update was sucessful`, NumberOfProfilesUpdated: profileUpdated})
             } else {
                 return res.status(500).json({message: `Something went wrong while trying to update your profile. Please try again later.`})
             }
