@@ -5,7 +5,7 @@ const validateSession = require('../middleware/validateSession');
 /**************************************
  ********* NEW PROFILE *********
 ************************************ */
-router.post('/register/:id', validateSession, (req, res) => {
+router.post('/register/', validateSession, (req, res) => {
     const checkForProfile = {
         where: {
             userId: req.user.id
@@ -80,10 +80,9 @@ router.put('/', validateSession, (req, res) => {
 /**************************************
  ********* DELETE PROFILE ************
 ************************************ */
-router.delete('/:id', validateSession, (req, res) => {
+router.delete('/', validateSession, (req, res) => {
     const thisProfile = {
         where: {
-            userId: req.params.id,
             userId: req.user.id
         }
     }

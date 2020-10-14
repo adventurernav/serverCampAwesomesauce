@@ -92,10 +92,10 @@ Validate Admin: Checks the token and returns the value of the 'role'.
 #### User
 ##### /user/register
 POST: Adds a new user
-
+![user register image](./assets/README/user-register.jpg)
 ##### /user/login
 POST: Checks the email and password against the database and returns an object with a new Json Web Token and User information.
-
+![user register image](./assets/README/user-login.jpg)
 ##### /user/
 Requires Validate Session Middleware
 GET: Returns a user object for the authenticated user. 
@@ -124,7 +124,7 @@ GET: Returns a user object for the authenticated user.
 
 ##### /profile/:id
 
-DELETE: Destroys the authenticated user's profile. Checks for the id in params and the validate session user object.
+DELETE: Destroys the authenticated user's profile. Checks for the id in the validate session user object.
 
 GET: This feature is not currently built into the client. Returns and object with each user's profile information.
 
