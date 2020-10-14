@@ -23,6 +23,7 @@ router.put('/users/:userId', validateAdmin, (req, res) => {
         email: req.body.email,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
+        role: req.body.role
     }
     const query = {
         where: {
