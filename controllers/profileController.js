@@ -112,8 +112,17 @@ router.get('/', validateSession, (req, res) => {
     Profile.findOne({
         where: { userId: searchid }
     })
-        .then(users => res.status(200).json({message: 'User(s) found:', users: users}))
+        .then(profile => res.status(200).json({message: 'Profile(s) found:', profile: profile}))
         .catch(err => res.status(500).json({ message: 'Could not get user information. Please try again.', error: err }))
+})
+/**************************************
+ ********* GET ALL PROFILE INFO *********
+************************************ */
+
+router.get('/all', validateSession, (req, res) => {
+    Profile.findAll()
+    .then(profile => res.status(200).json({profile: profile}))
+    .catch(err => res.status(500).json({ message: 'Could not get user information. Please try again.', error: err }))
 })
 
 /**************************************

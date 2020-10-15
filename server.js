@@ -13,6 +13,7 @@ const item = require('./controllers/itemController')
 const profile = require('./controllers/profileController')
 const admin = require('./controllers/adminController')
 const tokenChecker = require('./controllers/tokenCheckerController')
+const bmapi = require('./controllers/bmapiController')
 
 sequelize.sync();
 // sequelize.sync({force: true})
@@ -24,6 +25,7 @@ app.use(express.json());
 ************************************ */
 
 app.use('/user', user)
+app.use('/bmapi', bmapi)
 
 /**************************************
  ********* Protected Routes ************
