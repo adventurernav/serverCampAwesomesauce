@@ -6,7 +6,7 @@ const PORT = process.env.PORT;
 let sequelize = require('./db');
 
 app.use(cors())
-
+ 
 const user = require('./controllers/userController')
 const packlist = require('./controllers/packlistController')
 const item = require('./controllers/itemController')
